@@ -4,6 +4,7 @@ import com.example.demo.Dto.OrderedItemDTO;
 import com.example.demo.Dto.ProductDTO;
 import com.example.demo.entities.Order;
 import com.example.demo.entities.OrderItem;
+import com.example.demo.feign.ProductFeignClient;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.service.OrderService;
@@ -16,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +36,12 @@ public class OrderServiceImpl implements OrderService{
 	private OrderRepository repository;
 
 	@Autowired
-	private RestTemplate restTemplate;
+	private ProductFeignClient productFeignClient;
 	
 	@Override
 	public Order gerarPedido(List<OrderedItemDTO> orderedItem) {
 
-		HttpEntity<List<OrderedItemDTO>> request = new HttpEntity<>(orderedItem);
-		ResponseEntity<List<ProductDTO>> response = restTemplate.exchange(urlWebServiceProduct+"/search",HttpMethod.POST,
-				request, new ParameterizedTypeReference<>() {});
+		ResponseEntity<List<ProductDTO>> response = productFeignClient.listarProdutosPorFiltro(orderedItem);
 		List<OrderItem> orderItemsList = new ArrayList<>();
 
 		orderedItem.stream().forEach(order -> orderItemsList.add(new OrderItem(null,order.getProductName(),null,order.getQuantity(),null)));
