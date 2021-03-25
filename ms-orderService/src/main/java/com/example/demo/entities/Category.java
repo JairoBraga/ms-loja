@@ -12,16 +12,14 @@ public class Category implements Serializable{
 	
 	private String Name;
 
-	private List<Product> products;
 
 	public Category() {
 	}
 
-	public Category(Long id, String name, List<Product> products) {
+	public Category(Long id, String name) {
 		super();
 		Id = id;
 		Name = name;
-		this.products = products;
 	}
 
 	public Long getId() {
@@ -40,13 +38,6 @@ public class Category implements Serializable{
 		Name = name;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
 
 	@Override
 	public int hashCode() {

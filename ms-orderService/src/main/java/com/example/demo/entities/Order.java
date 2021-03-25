@@ -4,14 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_order")
@@ -25,7 +18,7 @@ public class Order implements Serializable{
 	
 	private LocalDateTime moment;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name = "tb_order_orderItem",joinColumns = @JoinColumn(name = "order_id" ),
 	inverseJoinColumns = @JoinColumn(name = "orderItem_id"))
 	private List<OrderItem> orderItens;

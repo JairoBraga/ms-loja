@@ -13,20 +13,23 @@ public class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	private String name;
+
 	private Double price;
 	
 	private Integer quantidade;
 	
-	private Product product;
+	private Long product_id;
 
 	public OrderItem() {}
 	
-	public OrderItem(Long id, Double price, Integer quantidade, Product product) {
+	public OrderItem(Long id,String name, Double price, Integer quantidade, Long product_id) {
+		this.name = name;
 		this.id = id;
 		this.price = price;
 		this.quantidade = quantidade;
-		this.product = product;
+		this.product_id = product_id;
 	}
 
 	public Long getId() {
@@ -35,6 +38,14 @@ public class OrderItem {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Double getPrice() {
@@ -53,12 +64,12 @@ public class OrderItem {
 		this.quantidade = quantidade;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Long getProduct_id() {
+		return product_id;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProduct_id(Long product_id) {
+		this.product_id = product_id;
 	}
 
 	@Override
