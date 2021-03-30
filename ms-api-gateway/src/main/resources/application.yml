@@ -1,0 +1,29 @@
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+server:
+  port: 9096
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/v1/product/search
+      discovery:
+        locator:
+          enabled: true
+  application:
+    name: api-gateway
+    instance:
+      instance-id: ${spring:application:name}:${spring:application:instance_id:${random:value}}
+    discovery:
+      enable: true

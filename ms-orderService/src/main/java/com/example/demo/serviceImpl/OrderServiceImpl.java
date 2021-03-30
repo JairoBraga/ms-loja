@@ -21,8 +21,7 @@ import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService{
-	
-	@Value("${urlWebServiceProduct}")
+
 	private String urlWebServiceProduct;
 
 	@Autowired
