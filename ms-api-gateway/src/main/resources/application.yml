@@ -13,14 +13,10 @@ server:
 spring:
   cloud:
     gateway:
-      routes:
-        - id: product-service
-          uri: lb://product-service
-          predicates:
-            - Path=/v1/product/search
       discovery:
         locator:
           enabled: true
+          lower-case-service-id: true
   application:
     name: api-gateway
     instance:

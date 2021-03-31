@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 @Component
-@FeignClient(name = "ms-product", url = "http://localhost:8080", path = "/v1/product")
+@FeignClient(name = "product-service", path = "/v1/product")
 public interface ProductFeignClient {
     @PostMapping(value = "/search")
     public ResponseEntity<List<ProductDTO>> listarProdutosPorFiltro(@RequestBody List<?> products);
